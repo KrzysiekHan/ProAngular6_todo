@@ -18,8 +18,22 @@ export class AppComponent {
   }
 
   addItem(newItem) {
-    if (newItem !== '') {
+    if ((newItem !== '') && !this.checkIfExists(newItem)) {
       this.model.items.push(new TodoItem(newItem, false));
+    }
+  }
+  checkIfExists(item) {
+    let containsItem;
+    this.model.items.forEach(element => {
+      if (element.action === item) {
+      containsItem = true;
+      }
+    });
+
+    if (containsItem) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
